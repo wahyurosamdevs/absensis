@@ -15,6 +15,11 @@ class CreateAbsensiTable extends Migration
     {
         Schema::create('absensi', function (Blueprint $table) {
             $table->id();
+            $table->string('id_jadwal',255);
+            $table->string('id_user',255);
+            $table->string('foto',255);
+            $table->enum('verifikasi',['Wait','Verifikasi']);
+            $table->enum('status',['Masuk','Sakit','Alpha']);
             $table->timestamps();
         });
     }

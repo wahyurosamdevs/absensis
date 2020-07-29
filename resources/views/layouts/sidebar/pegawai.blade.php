@@ -22,7 +22,7 @@
           </a>
         </li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="{{ url('/home/absensi/index/'.\Auth::id()) }}" class="nav-link">
             <i class="nav-icon fas fa-list-alt"></i>
             <p>
               Absensi
@@ -30,7 +30,7 @@
           </a>
         </li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="{{ url('/home/jadwal/detail/'.\Auth::id())}}" class="nav-link">
             <i class="nav-icon fas fa-calendar-alt"></i>
             <p>
               Jadwal

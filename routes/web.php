@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
 Route::get('atasan/home', 'HomeController@atasanHome')->name('atasan.home')->middleware('is_atasan');
+
 Route::prefix('admin/home/admin/')->group(function(){
   Route::get('/', 'UserController@indexAdmin')->name('admin.index');
   Route::get('create', 'UserController@createAdmin')->name('admin.create');
@@ -30,6 +31,7 @@ Route::prefix('admin/home/admin/')->group(function(){
   Route::post('update', 'UserController@updateAdmin')->name('admin.update');
   Route::post('delete/{id}', 'UserController@deleteAdmin')->name('admin.delete');
 });
+
 Route::prefix('admin/home/atasan/')->group(function(){
   Route::get('/', 'UserController@indexAtasan')->name('atasan.index');
   Route::get('create', 'UserController@createAtasan')->name('atasan.create');
@@ -38,6 +40,7 @@ Route::prefix('admin/home/atasan/')->group(function(){
   Route::post('update', 'UserController@updateAtasan')->name('atasan.update');
   Route::post('delete/{id}', 'UserController@deleteAtasan')->name('atasan.delete');
 });
+
 Route::prefix('admin/home/pegawai/')->group(function(){
   Route::get('/', 'UserController@indexPegawai')->name('pegawai.index');
   Route::get('create', 'UserController@createPegawai')->name('pegawai.create');
@@ -46,15 +49,35 @@ Route::prefix('admin/home/pegawai/')->group(function(){
   Route::post('update', 'UserController@updatePegawai')->name('pegawai.update');
   Route::post('delete/{id}', 'UserController@deletePegawai')->name('pegawai.delete');
 });
+
 Route::prefix('admin/home/jadwal')->group(function(){
   Route::get('/','JadwalController@indexSetJadwal')->name('jadwal.setjadwal');
   Route::post('/store','JadwalController@storeJadwal')->name('jadwal.store');
   Route::post('/cek/{id}','JadwalController@cek');
   Route::post('/detail/{id}','JadwalController@jadwaluser');
 });
+
 Route::prefix('atasan/home/jadwal')->group(function(){
   Route::get('/','JadwalController@indexSetJadwal')->name('jadwal.setjadwalAtasan');
   Route::post('/store','JadwalController@storeJadwal')->name('jadwal.storeAtasan');
   Route::post('/cek/{id}','JadwalController@cek');
   Route::post('/detail/{id}','JadwalController@jadwaluser');
+});
+
+Route::prefix('home/jadwal')->group(function(){
+  Route::get('/detail/{id}','JadwalController@jadwaluser');
+});
+
+Route::prefix('home/absensi')->group(function(){
+  Route::get('/detail/{id}','JadwalController@jadwaluser');
+});
+
+Route::prefix('home/absensi')->group(function(){
+  Route::get('/index/{id}','AbsensiController@index');
+  Route::post('/store/','AbsensiController@store');
+});
+Route::prefix('admin/home/absensi/')->group(function(){
+  Route::get('/', 'AbsensiController@verifikasi')->name('verifikasi.admin');
+  Route::post('/verifikasi/{id}', 'AbsensiController@detailverifikasi')->name('verifikasidetail.admin');
+  Route::post('/verifikasidata/{id}', 'AbsensiController@actionverifikasi')->name('verifikasi.store');
 });

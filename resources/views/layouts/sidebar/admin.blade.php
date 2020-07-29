@@ -22,7 +22,7 @@
           </a>
         </li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="{{ route('verifikasi.admin') }}" class="nav-link">
             <i class="nav-icon fas fa-list-alt"></i>
             <p>
               Absensi

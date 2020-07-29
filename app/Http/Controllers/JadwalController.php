@@ -114,6 +114,12 @@ class JadwalController extends Controller
           } else {
             return view('layouts.atasans.jadwal.manage.detail',compact('jadwal'));
           }
+        }else{
+          if ($jadwal == null) {
+            return view('layouts.pegawais.jadwal.index');
+          } else {
+            return view('layouts.pegawais.jadwal.index',compact('jadwal'));
+          }
         }
     }
 }
