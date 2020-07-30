@@ -25,7 +25,7 @@
                   <td>{{ $absen->id_user }}</td>
                   <td>{{ $absen->verifikasi }}</td>
                   <td>
-                    <form action="{{ url('admin/home/absensi/verifikasi/'.$absen->id) }}" method="post">
+                    <form action="{{ url('admin/home/absensi/verifikasi/'.$absen->id) }}" method="get">
                       @csrf
                       <input type="submit" name="verifikasi" value="Verifikasi" class="btn btn-success">
                     </form>

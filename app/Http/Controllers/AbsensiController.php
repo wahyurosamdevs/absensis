@@ -18,20 +18,18 @@ class AbsensiController extends Controller
         if (count($absensi) == '1') {
           return view('layouts.pegawais.absensi.index',compact('absensi','jadwal'));
         }else {
-          return view('layouts.pegawais.absensi.index',compact('jadwal'));
+          return view('layouts.pegawais.absensi.index',compact('jadwal','absensi'));
         }
-
       }else{
         return view('layouts.pegawais.absensi.index',compact('jadwal'));
       }
     }
     public function store(Request $request){
-
       if ($request->hasFile('foto')) {
         foreach ($request->file('foto') as $image) {
           $name=$image->getClientOriginalName();
           $image->move(public_path().'/foto/',$name);
-          $data[] =$name;
+          $data=$name;
         }
       }
       $Absensi = new Absensi;

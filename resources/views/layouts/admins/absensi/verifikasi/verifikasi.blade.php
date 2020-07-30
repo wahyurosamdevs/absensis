@@ -4,10 +4,11 @@
 <div class="container" >
   <h3>Verifikasi data</h3>
   <div class="row" >
-    <form action="{{ url('admin/home/absensi/verifikasidata/'.$Absensi[0]->id) }}" method="post">
+    @foreach ($Absensi as $Absen)
+    <form action="{{ url('admin/home/absensi/verifikasidata/'.$Absen->id) }}" method="post">
       @csrf
       <div class="col-sm-12" style="margin-top:10px">
-        @foreach ($Absensi as $Absen)
+
           <div class="form-group">
             <label>Pegawai : </label>
             <label>{{ $Absen->id_user }}</label>
@@ -24,10 +25,11 @@
               <option value="Alpha">Alpha</option>
             </select>
           </div>
-        @endforeach
+
         <input type="submit" name="save" value="Verifikasi" class="btn btn-success">
       </div>
     </form>
+            @endforeach
   </div>
 </div>
 

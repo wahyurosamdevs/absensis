@@ -78,6 +78,6 @@ Route::prefix('home/absensi')->group(function(){
 });
 Route::prefix('admin/home/absensi/')->group(function(){
   Route::get('/', 'AbsensiController@verifikasi')->name('verifikasi.admin');
-  Route::post('/verifikasi/{id}', 'AbsensiController@detailverifikasi')->name('verifikasidetail.admin');
+  Route::get('/verifikasi/{id}', 'AbsensiController@detailverifikasi')->name('verifikasidetail.admin');
   Route::post('/verifikasidata/{id}', 'AbsensiController@actionverifikasi')->name('verifikasi.store');
 });
