@@ -57,6 +57,12 @@ Route::prefix('admin/home/jadwal')->group(function(){
   Route::post('/detail/{id}','JadwalController@jadwaluser');
 });
 
+Route::prefix('admin/home/absensi/')->group(function(){
+  Route::get('/', 'AbsensiController@verifikasi')->name('verifikasi.admin');
+  Route::get('/verifikasi/{id}', 'AbsensiController@detailverifikasi')->name('verifikasidetail.admin');
+  Route::post('/verifikasidata/{id}', 'AbsensiController@actionverifikasi')->name('verifikasi.store');
+});
+
 Route::prefix('atasan/home/jadwal')->group(function(){
   Route::get('/','JadwalController@indexSetJadwal')->name('jadwal.setjadwalAtasan');
   Route::post('/store','JadwalController@storeJadwal')->name('jadwal.storeAtasan');
@@ -75,9 +81,4 @@ Route::prefix('home/absensi')->group(function(){
 Route::prefix('home/absensi')->group(function(){
   Route::get('/index/{id}','AbsensiController@index');
   Route::post('/store/','AbsensiController@store');
-});
-Route::prefix('admin/home/absensi/')->group(function(){
-  Route::get('/', 'AbsensiController@verifikasi')->name('verifikasi.admin');
-  Route::get('/verifikasi/{id}', 'AbsensiController@detailverifikasi')->name('verifikasidetail.admin');
-  Route::post('/verifikasidata/{id}', 'AbsensiController@actionverifikasi')->name('verifikasi.store');
 });
