@@ -40,6 +40,6 @@ class User extends Authenticatable
       return $this->hasMany(Jadwal::class);
     }
     public function absensi(){
-      return $this->hasMany(Absensi::class);
+      return $this->hasMany(Absensi::class,'id_user');
     }
 }

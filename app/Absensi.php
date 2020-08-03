@@ -10,9 +10,9 @@ class Absensi extends Model
   protected $fillable=['id_jadwal','id_user','foto','verifikasi','status'];
 
   public function user(){
-    return $this->belongsTo(User::class);
+    return $this->belongsTo(User::class,'id_user');
   }
   public function jadwal(){
-    return $this->belongsTo(Jadwal::class);
+    return $this->belongsTo(Jadwal::class,'id_jadwal');
   }
 }

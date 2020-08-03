@@ -11,7 +11,7 @@
 
           <div class="form-group">
             <label>Pegawai : </label>
-            <label>{{ $Absen->id_user }}</label>
+            <label>{{ $Absen->user->name }}</label>
           </div>
           <div class="form-group">
             <label>Foto : </label>

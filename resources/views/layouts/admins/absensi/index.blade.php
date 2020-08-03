@@ -21,8 +21,8 @@
             <tbody>
               @foreach ($Absensi as $absen)
                 <tr>
-                  <td>{{ $absen->id_jadwal }}</td>
-                  <td>{{ $absen->id_user }}</td>
+                  <td>{{ $absen->jadwal->tanggal }}</td>
+                  <td>{{ $absen->user->name }}</td>
                   <td>{{ $absen->verifikasi }}</td>
                   <td>
                     <form action="{{ url('admin/home/absensi/verifikasi/'.$absen->id) }}" method="get">

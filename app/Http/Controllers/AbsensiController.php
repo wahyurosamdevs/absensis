@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Jadwal;
 use App\Absensi;
+use App\User;
 use Carbon\Carbon;
 use DB;
 Use Redirect;
@@ -43,11 +44,14 @@ class AbsensiController extends Controller
       return back()->with('success', 'Berhasil Absensi Hari ini');
     }
     public function verifikasi(){
-      $Absensi = Absensi::all()->where('verifikasi','Wait');
+      $Absensi = Absensi::with('user')->with('jadwal')->where('verifikasi','Wait')->get();
+      // $Absensi = User::all();
+      // return response()->json($Absensi);
+
       return view('layouts.admins.absensi.index',compact('Absensi'));
     }
     public function detailverifikasi($id){
-      $Absensi = Absensi::all()->where('id',$id);
+      $Absensi = Absensi::with('user')->where('id',$id)->get();
       return view('layouts.admins.absensi.verifikasi.verifikasi',compact('Absensi'));
     }
     public function actionverifikasi($id,Request $request){

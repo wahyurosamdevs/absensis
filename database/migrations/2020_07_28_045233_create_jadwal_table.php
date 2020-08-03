@@ -17,7 +17,7 @@ class CreateJadwalTable extends Migration
             $table->id();
             $table->date('tanggal');
 
-            $table->bigInteger('id_user')->unsigned();
+            $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
 
             $table->string('deskripsi');

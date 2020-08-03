@@ -13,6 +13,6 @@ class Jadwal extends Model
       return $this->belongsTo(User::class);
     }
     public function absensi(){
-      return $this->hasOne(Absensi::class);
+      return $this->hasOne(Absensi::class,'id_jadwal');
     }
 }

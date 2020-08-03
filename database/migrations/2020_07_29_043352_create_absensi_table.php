@@ -15,11 +15,11 @@ class CreateAbsensiTable extends Migration
     {
         Schema::create('absensi', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_jadwal')->unsigned();
+            $table->unsignedBigInteger('id_jadwal');
             $table->foreign('id_jadwal')->references('id')->on('jadwals')
                 ->onDelete('cascade');
 
-            $table->bigInteger('id_user')->unsigned();
+            $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')
                 ->onDelete('cascade');
 
