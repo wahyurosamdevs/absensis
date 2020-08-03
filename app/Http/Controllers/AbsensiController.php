@@ -8,20 +8,27 @@ use App\Jadwal;
 use App\Absensi;
 use Carbon\Carbon;
 use DB;
+Use Redirect;
 class AbsensiController extends Controller
 {
     public function index($id){
       $id = Auth::id();
       $jadwal = Jadwal::where('id_user',$id)->where('tanggal',Carbon::parse('2020-08-10')->format('Y-m-d'))->get();
-      $absensi = Absensi::where('id_user',$id)->where('id_jadwal',$jadwal[0]->id)->get();
+      // printf($id);
+
+      // if ($jadwal == []) {
+      //   return view('welcome');
+      // }
+      // echo count($jadwal);
       if (count($jadwal) == '1') {
+        $absensi = Absensi::where('id_user',$id)->where('id_jadwal',$jadwal[0]->id)->get();
         if (count($absensi) == '1') {
           return view('layouts.pegawais.absensi.index',compact('absensi','jadwal'));
         }else {
           return view('layouts.pegawais.absensi.index',compact('jadwal','absensi'));
         }
-      }else{
-        return view('layouts.pegawais.absensi.index',compact('jadwal'));
+      }elseif($jadwal ){
+        return \Redirect::back();
       }
     }
     public function store(Request $request){
