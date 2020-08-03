@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Users;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
   public function indexAdmin(){
-    $user = Users::all()->where('is_admin','1');
+    $user = User::all()->where('is_admin','1');
     return view('layouts.admins.user.admin.index',compact('user'));
   }
 
@@ -20,7 +21,7 @@ class UserController extends Controller
     return view('layouts.admins.user.admin.create');
   }
   public function storeAdmin(Request $request){
-    Users::create([
+    User::create([
         'name' => $request->input('nama'),
         'email' => $request->input('email'),
         'password' => Hash::make($request->input('password')),
@@ -35,12 +36,12 @@ class UserController extends Controller
   }
   public function editAdmin($id)
   {
-    $users = Users::all()->where('id',$id);
+    $users = User::all()->where('id',$id);
     return view('layouts.admins.user.admin.edit',compact('users'));
   }
   public function updateAdmin(Request $request)
   {
-    $users = Users::where('id',$request->id)->update(
+    $users = User::where('id',$request->id)->update(
       [
         'name' => $request->input('nama'),
         'email' => $request->input('email'),
@@ -56,14 +57,14 @@ class UserController extends Controller
     return redirect('admin/home/admin/');
   }
   public function deleteAdmin($id){
-    $users = Users::find($id);
+    $users = User::find($id);
     $users->delete();
     return redirect('admin/home/admin/');
   }
 
 
   public function indexAtasan(){
-    $user = Users::all()->where('is_atasan','1');
+    $user = User::all()->where('is_atasan','1');
     return view('layouts.admins.user.atasan.index',compact('user'));
   }
 
@@ -72,7 +73,7 @@ class UserController extends Controller
     return view('layouts.admins.user.atasan.create');
   }
   public function storeAtasan(Request $request){
-    Users::create([
+    User::create([
         'name' => $request->input('nama'),
         'email' => $request->input('email'),
         'password' => Hash::make($request->input('password')),
@@ -87,12 +88,12 @@ class UserController extends Controller
   }
   public function editAtasan($id)
   {
-    $users = Users::all()->where('id',$id);
+    $users = User::all()->where('id',$id);
     return view('layouts.admins.user.atasan.edit',compact('users'));
   }
   public function updateAtasan(Request $request)
   {
-    $users = Users::where('id',$request->id)->update(
+    $users = User::where('id',$request->id)->update(
       [
         'name' => $request->input('nama'),
         'email' => $request->input('email'),
@@ -108,12 +109,12 @@ class UserController extends Controller
     return redirect('admin/home/atasan/');
   }
   public function deleteAtasan($id){
-    $users = Users::find($id);
+    $users = User::find($id);
     $users->delete();
     return redirect('admin/home/atasan/');
   }
   public function indexPegawai(){
-    $user = Users::all()->where('is_admin','0')->where('is_atasan','0');
+    $user = User::all()->where('is_admin','0')->where('is_atasan','0');
     return view('layouts.admins.user.pegawai.index',compact('user'));
   }
 
@@ -122,7 +123,7 @@ class UserController extends Controller
     return view('layouts.admins.user.pegawai.create');
   }
   public function storePegawai(Request $request){
-    Users::create([
+    User::create([
         'name' => $request->input('nama'),
         'email' => $request->input('email'),
         'password' => Hash::make($request->input('password')),
@@ -137,12 +138,12 @@ class UserController extends Controller
   }
   public function editPegawai($id)
   {
-    $users = Users::all()->where('id',$id);
+    $users = User::all()->where('id',$id);
     return view('layouts.admins.user.pegawai.edit',compact('users'));
   }
   public function updatePegawai(Request $request)
   {
-    $users = Users::where('id',$request->id)->update(
+    $users = User::where('id',$request->id)->update(
       [
         'name' => $request->input('nama'),
         'email' => $request->input('email'),
@@ -158,7 +159,7 @@ class UserController extends Controller
     return redirect('admin/home/pegawai/');
   }
   public function deletePegawai($id){
-    $users = Users::find($id);
+    $users = User::find($id);
     $users->delete();
     return redirect('admin/home/pegawai/');
   }

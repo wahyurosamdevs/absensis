@@ -16,9 +16,13 @@ class CreateJadwalTable extends Migration
         Schema::create('jadwals', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->string('id_user');
+
+            $table->bigInteger('id_user')->unsigned();
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+
             $table->string('deskripsi');
             $table->timestamps();
+
         });
     }
 

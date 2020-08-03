@@ -15,12 +15,20 @@ class CreateAbsensiTable extends Migration
     {
         Schema::create('absensi', function (Blueprint $table) {
             $table->id();
-            $table->string('id_jadwal',255);
-            $table->string('id_user',255);
+            $table->bigInteger('id_jadwal')->unsigned();
+            $table->foreign('id_jadwal')->references('id')->on('jadwals')
+                ->onDelete('cascade');
+
+            $table->bigInteger('id_user')->unsigned();
+            $table->foreign('id_user')->references('id')->on('users')
+                ->onDelete('cascade');
+
             $table->string('foto',255);
             $table->enum('verifikasi',['Wait','Verifikasi']);
             $table->enum('status',['Masuk','Sakit','Alpha']);
             $table->timestamps();
+
+
         });
     }
 

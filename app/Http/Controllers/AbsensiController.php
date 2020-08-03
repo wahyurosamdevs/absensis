@@ -12,7 +12,7 @@ class AbsensiController extends Controller
 {
     public function index($id){
       $id = Auth::id();
-      $jadwal = Jadwal::where('id_user',$id)->where('tanggal',Carbon::parse('2020-08-03')->format('Y-m-d'))->get();
+      $jadwal = Jadwal::where('id_user',$id)->where('tanggal',Carbon::parse('2020-08-10')->format('Y-m-d'))->get();
       $absensi = Absensi::where('id_user',$id)->where('id_jadwal',$jadwal[0]->id)->get();
       if (count($jadwal) == '1') {
         if (count($absensi) == '1') {
