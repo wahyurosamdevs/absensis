@@ -14,12 +14,6 @@ class AbsensiController extends Controller
     public function index($id){
       $id = Auth::id();
       $jadwal = Jadwal::where('id_user',$id)->where('tanggal',Carbon::parse('2020-08-10')->format('Y-m-d'))->get();
-      // printf($id);
-
-      // if ($jadwal == []) {
-      //   return view('welcome');
-      // }
-      // echo count($jadwal);
       if (count($jadwal) == '1') {
         $absensi = Absensi::where('id_user',$id)->where('id_jadwal',$jadwal[0]->id)->get();
         if (count($absensi) == '1') {
