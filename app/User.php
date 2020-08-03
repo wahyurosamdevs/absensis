@@ -37,7 +37,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function jadwal(){
-      return $this->hasMany(Jadwal::class);
+      return $this->hasMany(Jadwal::class,'id_user');
     }
     public function absensi(){
       return $this->hasMany(Absensi::class,'id_user');
