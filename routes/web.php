@@ -53,8 +53,17 @@ Route::prefix('admin/home/pegawai/')->group(function(){
 Route::prefix('admin/home/jadwal')->group(function(){
   Route::get('/','JadwalController@indexSetJadwal')->name('jadwal.setjadwal');
   Route::post('/store','JadwalController@storeJadwal')->name('jadwal.store');
-  Route::post('/cek/{id}','JadwalController@cek');
+  Route::get('/cek/{id}','JadwalController@cek');
   Route::post('/detail/{id}','JadwalController@jadwaluser');
+});
+
+Route::prefix('admin/home/periode')->group(function(){
+  Route::get('/','SetupJadwalController@index')->name('setupjadwal.index');
+  Route::get('/create','SetupJadwalController@create')->name('setupjadwal.create');
+  Route::post('/store','SetupJadwalController@store')->name('setupjadwal.store');
+  Route::get('/edit/{id}','SetupJadwalController@edit');
+  Route::post('/update','SetupJadwalController@update')->name('setupjadwal.update');
+  Route::post('/delete/{id}','SetupJadwalController@destroy');
 });
 
 Route::prefix('admin/home/absensi/')->group(function(){

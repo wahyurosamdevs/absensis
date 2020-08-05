@@ -20,6 +20,7 @@
             <h1>Absensi</h1>
             <input type="hidden" name="id_user" value="{{ \Auth::id() }}">
             <input type="hidden" name="id_jadwal" value="{{ $jadwal[0]->id }}">
+            <input type="hidden" name="id_setupjadwal" value="{{ $jadwal[0]->id_setupjadwal }}">
             <div class="form-group">
               <label>Foto</label>
               <input type="file" name="foto[]">

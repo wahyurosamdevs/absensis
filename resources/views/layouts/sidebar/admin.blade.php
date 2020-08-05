@@ -72,12 +72,12 @@
                 <p>Manage Jadwal</p>
               </a>
             </li>
-            {{-- <li>
-              <a href="pages/layout/fixed-topnav.html" class="nav-link">
+            <li>
+              <a href="{{ url('/admin/home/periode/') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Verifikasi</p>
+                <p>Periode</p>
               </a>
-            </li> --}}
+            </li>
           </ul>
         </li>
         <li class="nav-item has-treeview">

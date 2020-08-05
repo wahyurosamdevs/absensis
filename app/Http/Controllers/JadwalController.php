@@ -6,19 +6,21 @@ use Illuminate\Support\Facades\Auth;
 use App\Users;
 use Illuminate\Http\Request;
 use App\Jadwal;
+use App\SetupJadwal;
 use DB;
 class JadwalController extends Controller
 {
     public function indexSetJadwal(){
       $id = Auth::id();
       $user = Users::where('id',$id)->get();
-
       if ($user[0]->is_admin == '1'){
+        $periode = SetupJadwal::latest()->first();
         $user = Users::all()->where('is_admin','0')->where('is_atasan','0');
-        return view('layouts.admins.jadwal.manage.index',compact('user'));
+        return view('layouts.admins.jadwal.index')->with(['user' => $user, 'periode' => $periode]);
       }elseif ($user[0]->is_atasan == '1') {
+        $periode = SetupJadwal::latest()->first();
         $user = Users::all()->where('is_admin','0')->where('is_atasan','0');
-        return view('layouts.atasans.jadwal.manage.index',compact('user'));
+        return view('layouts.admins.jadwal.index')->with(['user' => $user, 'periode' => $periode]);
       }
 
     }
@@ -32,6 +34,7 @@ class JadwalController extends Controller
           $setjadwal[]=[
               'tanggal' => $request->tanggal,
               'id_user' => $request->id_user[$i],
+              'id_setupjadwal' => $request->periode,
               'deskripsi' => $request->deskripsi,
           ];
         }
@@ -69,32 +72,40 @@ class JadwalController extends Controller
     public function cek($id){
       $jadwal=DB::table('jadwals')
             ->where('id_user',$id)
+            ->where('id_setupjadwal',SetupJadwal::latest()->first()->id)
             ->join('users','users.id','=','jadwals.id_user')
             ->select('users.name','jadwals.tanggal','jadwals.deskripsi')
             ->get();
       $jadwalscount=count($jadwal);
-      $name=$jadwal[0]->name;
-      $id = Auth::id();
-      $user = Users::where('id',$id)->get();
-
-      if ($user[0]->is_admin == '1'){
-        if ($jadwalscount < 3) {
-          return redirect('admin/home/jadwal')->with('status', 'nama pegawai '.$name.' belum dijadwalkan minimal 3 kali dalam seminggu');
-        }else{
-          return redirect('admin/home/jadwal')->with('status', 'nama pegawai '.$name.' telah dijadwal minimal  3 kali seminggu');
+      // echo SetupJadwal::latest()->first()->id;
+      if ($jadwalscount > 0) {
+        $name=$jadwal[0]->name;
+        $id = Auth::id();
+        $user = Users::where('id',$id)->get();
+        if ($user[0]->is_admin == '1'){
+          if ($jadwalscount < 3) {
+            return redirect('admin/home/jadwal')->with('status', 'nama pegawai '.$name.' belum dijadwalkan minimal 3 kali dalam seminggu');
+          }else{
+            return redirect('admin/home/jadwal')->with('status', 'nama pegawai '.$name.' telah dijadwal minimal  3 kali seminggu');
+          }
+        }elseif ($user[0]->is_atasan == '1') {
+          if ($jadwalscount < 3) {
+            return redirect('atasan/home/jadwal')->with('status', 'nama pegawai '.$name.' belum dijadwalkan minimal 3 kali dalam seminggu');
+          }else{
+            return redirect('atasan/home/jadwal')->with('status', 'nama pegawai '.$name.' telah dijadwal minimal  3 kali seminggu');
+          }
         }
-      }elseif ($user[0]->is_atasan == '1') {
-        if ($jadwalscount < 3) {
-          return redirect('atasan/home/jadwal')->with('status', 'nama pegawai '.$name.' belum dijadwalkan minimal 3 kali dalam seminggu');
-        }else{
-          return redirect('atasan/home/jadwal')->with('status', 'nama pegawai '.$name.' telah dijadwal minimal  3 kali seminggu');
-        }
+      } else {
+          return redirect('atasan/home/jadwal')->with('status', 'belum ada jadwal');
       }
+
+
 
     }
     public function jadwaluser($id){
         $jadwal=DB::table('jadwals')
               ->where('id_user',$id)
+              ->where('id_setupjadwal',SetupJadwal::latest()->first()->id)
               ->join('users','users.id','=','jadwals.id_user')
               ->select('users.name','jadwals.tanggal','jadwals.deskripsi')
               ->get();

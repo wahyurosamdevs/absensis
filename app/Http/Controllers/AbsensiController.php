@@ -38,6 +38,7 @@ class AbsensiController extends Controller
       $Absensi->id_user=$request->id_user;
       $Absensi->id_jadwal=$request->id_jadwal;
       $Absensi->foto=$data;
+      $Absensi->id_setupjadwal=$request->id_setupjadwal;
       $Absensi->verifikasi=$request->verifikasi;
       $Absensi->status=$request->status;
       $Absensi->save();

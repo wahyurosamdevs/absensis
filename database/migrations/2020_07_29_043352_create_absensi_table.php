@@ -22,7 +22,9 @@ class CreateAbsensiTable extends Migration
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')
                 ->onDelete('cascade');
-
+            $table->unsignedBigInteger('id_setupjadwal');
+            $table->foreign('id_setupjadwal')->references('id')->on('setup_jadwals')
+                ->onDelete('cascade');
             $table->string('foto',255);
             $table->enum('verifikasi',['Wait','Verifikasi']);
             $table->enum('status',['Masuk','Sakit','Alpha']);

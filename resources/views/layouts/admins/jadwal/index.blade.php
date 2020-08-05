@@ -38,6 +38,12 @@
              }}" class="form-control">
           </div>
           <div class="form-group">
+            <label>Periode</label>
+            <select class="form-control" name="periode">
+              <option value="{{ $periode->id }}">{{ $periode->periode }}</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label>Deskripsi</label>
             <textarea name="deskripsi" rows="5" class="form-control"></textarea>
           </div>
@@ -62,10 +68,11 @@
                   <td>{{ $user->name }}</td>
                   <td>{{ $user->telepon }}</td>
                   <td>
-                    <form action="{{ url('admin/home/jadwal/cek/'.$user->id) }}" method="post">
+                    {{-- <form action="{{ url('admin/home/jadwal/cek/'.$user->id) }}" method="post">
                       @csrf
                       <input type="submit" name="cek" value="Cek" class="btn btn-warning">
-                    </form>
+                    </form> --}}
+                    <a href="{{ url('admin/home/jadwal/cek/'.$user->id) }}" class="btn btn-warning">Cek</a>
                   </td>
                   <td>
                     <form action="{{ url('admin/home/jadwal/detail/'.$user->id) }}" method="post">
